@@ -21,17 +21,13 @@ class SourceFile < Thor
   def convert
     self.destination_root = 'vendor/assets'
     inside destination_root do
-      run('sass-convert -F css -T sass stylesheets/chosen.css stylesheets/chosen.css.sass')
-      gsub_file 'stylesheets/chosen.css.sass', '(chosen-sprite.png)', "('chosen-sprite.png')"
-      gsub_file 'stylesheets/chosen.css.sass', '(chosen-sprite@2x.png)', "('chosen-sprite@2x.png')"
-      gsub_file 'stylesheets/chosen.css.sass', ' url', ' image-url'
+      gsub_file 'stylesheets/chosen.css', ' url', ' image-url'
     end
   end
 
   desc 'clean up useless files', 'clean up useless files'
   def cleanup
     self.destination_root = 'vendor/assets'
-    remove_file 'stylesheets/chosen.css'
     remove_file 'VERSION'
   end
 
